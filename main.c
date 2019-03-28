@@ -22,13 +22,13 @@ int main(int argc, char *argv[])
     //в поєднанні з атрибутом A_BOLD.
     attron(A_BOLD);
 
-    printw("Текст має вивестись жовтим кольором на синьому фоні!\n");
+    printw("kekekekekekedsdfsdvsdfvsd!\n");
 
     attroff(A_BOLD);
 
     // Вивести текст без налаштування кольору
     attroff(COLOR_PAIR(1));
-    printw("Натисніть будь-яку клавішу для виходу\n");
+    printw("sdfgsdfsdfvgsfrierpiehjrij\n");
 
     // Оновлення екрану
     refresh();
@@ -39,3 +39,4 @@ int main(int argc, char *argv[])
     // Відновлення початкового налаштування терміналу
     endwin();
 }
+// gcc main.c  !!!! -lncurses
