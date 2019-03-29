@@ -11,7 +11,7 @@ float ScSo, Sc, So, ew, w1, w2;
 const float mo = 4 * M_PI * 1e-7;
 
 int mx, my, x, y, s;
-wchar_t sim[]= {9474, 9475, 9476, L'\0'};
+wchar_t sim= 0x2550;
 #define COLOR_BLUE_YELLOW 1
 
 int main(int argc, char *argv[])
@@ -20,7 +20,8 @@ int main(int argc, char *argv[])
 
 //    printw("y=%d  x=%d", my, mx);
 
-    setlocale(LC_ALL, "uk_UA.utf8"); // Включення підтримки юнікод
+    setlocale(LC_ALL, ""); // Включення підтримки юнікод
+    setlocale(LC_CTYPE,"");
 //
 //    // Ініціалізація ncurses (зчитування конфігурації термінала)
     WINDOW *stdscr = initscr();
@@ -43,38 +44,69 @@ int main(int argc, char *argv[])
 
 bkgdset (COLOR_PAIR(COLOR_BLUE_YELLOW));
 clear();
-//sim=0x2550;
+sim=0x2550;
 for (x=1; x < (mx-1); x++)
 {
 //sim++;
 //mvaddwstr(1,x,y);
-
-move (0,x);
-echochar('=');
+sim=0x2550;
+//move (0,x);
+//echochar('=');
+mvaddwstr (0,x,&sim);
+//mvadd_wch (0,x,sim);
 //printw ("%s",'=');
-move (my-1,x);
+//move (my-1,x);
 //printw ("%s",'*');
 //move (3,x);
-echochar('=');
-move (5,x);
-echochar ('-');
-move (x/3,x);
+//echochar('=');
+//move (5,x);
+//echochar ('-');
+//move (x/3,x);
 //printw ("%c", sim );
-mvaddwstr (5,5,sim);
+//while (1)
+//{
+
+mvaddwstr (my-1,x,&sim);
+//move (25,25);
+//printw ("%s", sim);
+sim=0x2500;
+mvaddwstr (5,x,&sim);
+//}
 }
+sim=0x2551;
 for (x=0; x < (my); x++)
 {
-y++;
+//y++;
 //mvaddwstr(1,x,y);
 
-move (x,0);
-echochar('|');
+//move (x,0);
+//echochar('|');
 //printw ("%s",'*');
-move (x,mx-1);
+//move (x,mx-1);
 //printw ("%s",'*');
 //move (3,x);
-echochar('|');
+//echochar('|');
+mvaddwstr (x,0,&sim);
+mvaddwstr (x,mx-1,&sim);
 }
+
+sim=0x2554;
+mvaddwstr (0,0,&sim);
+sim=0x255a;
+mvaddwstr (my-1,0,&sim);
+sim=0x2557;
+mvaddwstr (0,mx-1,&sim);
+sim=0x255d;
+mvaddwstr (my-1,mx-1,&sim);
+sim=0x255f;
+mvaddwstr (5,0,&sim);
+sim=0x2562;
+mvaddwstr (5,mx-1,&sim);
+
+
+
+
+
 
 //move (2,2);
 //printw ("y=%d x=%d", my, mx);
