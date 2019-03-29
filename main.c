@@ -1,16 +1,17 @@
+#define _GNU_SOURCE
 #include <ncursesw/ncurses.h>
 
 //#include <ncursesw/cursesw.h>
 #include <locale.h>
 #include <math.h>
-
+#include <wchar.h>
 
 float Bm, g, Hg, U1min, U2, Kt, I1, I1ef, I2, I2ef, Le, Hm, IW, f, J, ko, Pu;
 float ScSo, Sc, So, ew, w1, w2;
 const float mo = 4 * M_PI * 1e-7;
 
 int mx, my, x, y, s;
-
+wchar_t sim[]= {9474, 9475, 9476, L'\0'};
 #define COLOR_BLUE_YELLOW 1
 
 int main(int argc, char *argv[])
@@ -42,19 +43,24 @@ int main(int argc, char *argv[])
 
 bkgdset (COLOR_PAIR(COLOR_BLUE_YELLOW));
 clear();
-y=0;
+//sim=0x2550;
 for (x=1; x < (mx-1); x++)
 {
-y++;
+//sim++;
 //mvaddwstr(1,x,y);
 
 move (0,x);
-echochar('*');
-//printw ("%s",'*');
+echochar('=');
+//printw ("%s",'=');
 move (my-1,x);
 //printw ("%s",'*');
 //move (3,x);
-echochar('*');
+echochar('=');
+move (5,x);
+echochar ('-');
+move (x/3,x);
+//printw ("%c", sim );
+mvaddwstr (5,5,sim);
 }
 for (x=0; x < (my); x++)
 {
@@ -62,16 +68,16 @@ y++;
 //mvaddwstr(1,x,y);
 
 move (x,0);
-echochar('*');
+echochar('|');
 //printw ("%s",'*');
 move (x,mx-1);
 //printw ("%s",'*');
 //move (3,x);
-echochar('*');
+echochar('|');
 }
 
-move (2,2);
-printw ("y=%d x=%d", my, mx);
+//move (2,2);
+//printw ("y=%d x=%d", my, mx);
 //erase();
 refresh();
     
