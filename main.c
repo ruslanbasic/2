@@ -5,13 +5,16 @@
 #include <locale.h>
 #include <math.h>
 #include <wchar.h>
+#include <string.h>
 
 float Bm, g, Hg, U1min, U2, Kt, I1, I1ef, I2, I2ef, Le, Hm, IW, f, J, ko, Pu;
 float ScSo, Sc, So, ew, w1, w2;
 const float mo = 4 * M_PI * 1e-7;
 
-int mx, my, x, y, s;
-wchar_t sim= 0x2550;
+int mx, my, x, y, s, a1, a2;
+wchar_t sim[]= { 0x0000L, 0x0000L};
+//lomg int sim[2];
+//sim[1]=L0x0000;
 #define COLOR_BLUE_YELLOW 1
 
 int main(int argc, char *argv[])
@@ -30,7 +33,7 @@ int main(int argc, char *argv[])
     start_color();
     
     init_pair(COLOR_BLUE_YELLOW, COLOR_BLACK, COLOR_WHITE);
-
+    init_pair(2, COLOR_GREEN, COLOR_WHITE);
 //    // Початок відображення в заданому кольоровому режимі
     attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
 
@@ -44,15 +47,15 @@ int main(int argc, char *argv[])
 
 bkgdset (COLOR_PAIR(COLOR_BLUE_YELLOW));
 clear();
-sim=0x2550;
+sim[0]=0x2550;
 for (x=1; x < (mx-1); x++)
 {
 //sim++;
 //mvaddwstr(1,x,y);
-sim=0x2550;
+sim[0]=0x2550;
 //move (0,x);
 //echochar('=');
-mvaddwstr (0,x,&sim);
+mvaddwstr (0,x,sim);
 //mvadd_wch (0,x,sim);
 //printw ("%s",'=');
 //move (my-1,x);
@@ -66,14 +69,14 @@ mvaddwstr (0,x,&sim);
 //while (1)
 //{
 
-mvaddwstr (my-1,x,&sim);
+mvaddwstr (my-1,x,sim);
 //move (25,25);
 //printw ("%s", sim);
-sim=0x2500;
-mvaddwstr (5,x,&sim);
+sim[0]=0x2550;
+mvaddwstr (2,x,sim);
 //}
 }
-sim=0x2551;
+sim[0]=0x2551;
 for (x=0; x < (my); x++)
 {
 //y++;
@@ -86,30 +89,48 @@ for (x=0; x < (my); x++)
 //printw ("%s",'*');
 //move (3,x);
 //echochar('|');
-mvaddwstr (x,0,&sim);
-mvaddwstr (x,mx-1,&sim);
+mvaddwstr (x,0,sim);
+mvaddwstr (x,mx-1,sim);
 }
 
-sim=0x2554;
-mvaddwstr (0,0,&sim);
-sim=0x255a;
-mvaddwstr (my-1,0,&sim);
-sim=0x2557;
-mvaddwstr (0,mx-1,&sim);
-sim=0x255d;
-mvaddwstr (my-1,mx-1,&sim);
-sim=0x255f;
-mvaddwstr (5,0,&sim);
-sim=0x2562;
-mvaddwstr (5,mx-1,&sim);
+sim[0]=0x2554;
+mvaddwstr (0,0,sim);
+sim[0]=0x255a;
+mvaddwstr (my-1,0,sim);
+sim[0]=0x2557;
+mvaddwstr (0,mx-1,sim);
+sim[0]=0x255d;
+mvaddwstr (my-1,mx-1,sim);
+sim[0]=0x2560;
+mvaddwstr (2,0,sim);
+sim[0]=0x2563;
+mvaddwstr (2,mx-1,sim);
 
 
+sim[0]=0x2566;
+mvaddwstr (0,108,sim);
+sim[0]=0x2569;
+mvaddwstr (2,108,sim);
+sim[0]=0x2551;
+mvaddwstr (1,108,sim);
+refresh();
+attron(COLOR_PAIR(2));
 
+for (a2=0;a2<8;a2++)
+{
+    for (a1=0;a1<16;a1++)
+    {
+	sim[0]=0x2500+a1+a2*16;
+	mvaddwstr (4+a2, a1+64, sim);
+    }
+}
+move (1,20);
+printw ("color white = %d color black = %d color green = %d", COLOR_WHITE, COLOR_BLACK, COLOR_GREEN);
 
-
-
-//move (2,2);
-//printw ("y=%d x=%d", my, mx);
+attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
+refresh();
+move (1,114);
+printw ("y=%d x=%d", my, mx);
 //erase();
 refresh();
     
