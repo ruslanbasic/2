@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
     start_color();
     
     init_pair(COLOR_BLUE_YELLOW, COLOR_BLACK, COLOR_WHITE);
-    init_pair(2, COLOR_GREEN, COLOR_WHITE);
+    init_pair(2, COLOR_GREEN, COLOR_BLACK);
 //    // Початок відображення в заданому кольоровому режимі
     attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
 
@@ -116,16 +116,19 @@ mvaddwstr (1,108,sim);
 refresh();
 attron(COLOR_PAIR(2));
 
-for (a2=0;a2<8;a2++)
+for (a2=0;a2<16;a2++)
 {
+    move (5+a2*2,3);
+    printw("%x", 0x2500+a2*16);
     for (a1=0;a1<16;a1++)
     {
 	sim[0]=0x2500+a1+a2*16;
-	mvaddwstr (4+a2, a1+64, sim);
+	mvaddwstr (5+a2*2, a1*2+10, sim);
     }
+    refresh();
 }
-move (1,20);
-printw ("color white = %d color black = %d color green = %d", COLOR_WHITE, COLOR_BLACK, COLOR_GREEN);
+//move (1,20);
+//printw ("color white = %d color black = %d color green = %d", COLOR_WHITE, COLOR_BLACK, COLOR_GREEN);
 
 attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
 refresh();
@@ -133,7 +136,7 @@ move (1,114);
 printw ("y=%d x=%d", my, mx);
 //erase();
 refresh();
-    
+/*    
 move (10, 20);
 
 //getyx(10,10);
@@ -174,7 +177,7 @@ move (10, 20);
 
 move (20,27);
     printw("OUT");
-
+*/
     // Оновлення екрану
     refresh();
 
