@@ -23,8 +23,9 @@ int main(int argc, char *argv[])
 
 //    printw("y=%d  x=%d", my, mx);
 
-    setlocale(LC_ALL, ""); // Включення підтримки юнікод
-    setlocale(LC_CTYPE,"");
+    setlocale(LC_ALL, "en_US.UTF-8"); // Включення підтримки юнікод
+    //SetConsoleOutputCP (1251);
+//    setlocale(LC_CTYPE,"UA");
 //
 //    // Ініціалізація ncurses (зчитування конфігурації термінала)
     WINDOW *stdscr = initscr();
@@ -115,18 +116,39 @@ sim[0]=0x2551;
 mvaddwstr (1,108,sim);
 refresh();
 attron(COLOR_PAIR(2));
-
+//0x2500
+int start = 0x2500;
 for (a2=0;a2<16;a2++)
 {
     move (5+a2*2,3);
-    printw("%x", 0x2500+a2*16);
-    for (a1=0;a1<16;a1++)
+    printw("%x", start+a2*32);
+    for (a1=0;a1<32;a1++)
     {
-	sim[0]=0x2500+a1+a2*16;
-	mvaddwstr (5+a2*2, a1*2+10, sim);
+	sim[0]=start+a1+a2*32;
+	//mvaddwstr (5+a2*2, a1*2+10, sim);
+	echochar(0x400000+a1+a2*32);
     }
     refresh();
+//    beep();
+
+
 }
+
+	sim[0]=ACS_PI;
+	mvaddwstr (1, 10, sim);
+	move (1,15);
+	echochar(ACS_ULCORNER);
+	echochar(ACS_HLINE);
+	echochar(ACS_LLCORNER);
+	echochar(ACS_URCORNER);
+	echochar(ACS_LRCORNER);
+	echochar(ACS_LTEE);
+	echochar(ACS_RTEE);
+	echochar(ACS_BTEE);
+	echochar(ACS_TTEE);
+echochar('-');
+printw("%x",ACS_VLINE);
+
 //move (1,20);
 //printw ("color white = %d color black = %d color green = %d", COLOR_WHITE, COLOR_BLACK, COLOR_GREEN);
 
@@ -136,6 +158,9 @@ move (1,114);
 printw ("y=%d x=%d", my, mx);
 //erase();
 refresh();
+
+
+
 /*    
 move (10, 20);
 
