@@ -118,7 +118,7 @@ refresh();
 attron(COLOR_PAIR(2));
 //0x2500
 int start = 0x2500;
-for (a2=0;a2<16;a2++)
+for (a2=0;a2<8;a2++)
 {
     move (5+a2*2,3);
     printw("%x", start+a2*32);
@@ -126,6 +126,7 @@ for (a2=0;a2<16;a2++)
     {
 	sim[0]=start+a1+a2*32;
 	//mvaddwstr (5+a2*2, a1*2+10, sim);
+	move (5+a2*2,a1*2+10);
 	echochar(0x400000+a1+a2*32);
     }
     refresh();
@@ -133,6 +134,25 @@ for (a2=0;a2<16;a2++)
 
 
 }
+
+for (a2=0;a2<8;a2++)
+{
+    move (5+a2*2,3);
+    printw("%x", start+a2*32);
+    for (a1=0;a1<32;a1++)
+    {
+	sim[0]=start+a1+a2*32;
+	//mvaddwstr (5+a2*2, a1*2+10, sim);
+	move (5+(a2+8)*2,a1*2+10);
+	echochar(0x000000+a1+a2*32);
+    }
+    refresh();
+//    beep();
+
+
+}
+
+
 
 	sim[0]=ACS_PI;
 	mvaddwstr (1, 10, sim);
