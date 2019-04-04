@@ -115,68 +115,149 @@ mvaddwstr (2,108,sim);
 sim[0]=0x2551;
 mvaddwstr (1,108,sim);
 refresh();
-attron(COLOR_PAIR(2));
+
+
+
+
+
+
+
+//attron(COLOR_PAIR(2));
+
+
 //0x2500
-int start = 0x2500;
-for (a2=0;a2<8;a2++)
-{
-    move (5+a2*2,3);
-    printw("%x", start+a2*32);
-    for (a1=0;a1<32;a1++)
-    {
-	sim[0]=start+a1+a2*32;
-	//mvaddwstr (5+a2*2, a1*2+10, sim);
-	move (5+a2*2,a1*2+10);
-	echochar(0x400000+a1+a2*32);
-    }
-    refresh();
-//    beep();
+//int start = 0x2500;
+//for (a2=0;a2<8;a2++)
+//{
+//    move (5+a2*2,3);
+//    printw("%x", start+a2*32);
+//    for (a1=0;a1<32;a1++)
+//    {
+//	sim[0]=start+a1+a2*32;
+//	//mvaddwstr (5+a2*2, a1*2+10, sim);
+//	move (5+a2*2,a1*2+10);
+//	echochar(0x400000+a1+a2*32);
+//    }
+//    refresh();
+////    beep();
+//
+//
+//}
+//
+//for (a2=0;a2<8;a2++)
+//{
+//    move (5+a2*2,3);
+//    printw("%x", start+a2*32);
+//    for (a1=0;a1<32;a1++)
+//    {
+//	sim[0]=start+a1+a2*32;
+//	//mvaddwstr (5+a2*2, a1*2+10, sim);
+//	move (5+(a2+8)*2,a1*2+10);
+//	echochar(0x000000+a1+a2*32);
+//    }
+//    refresh();
+////    beep();
 
 
-}
-
-for (a2=0;a2<8;a2++)
-{
-    move (5+a2*2,3);
-    printw("%x", start+a2*32);
-    for (a1=0;a1<32;a1++)
-    {
-	sim[0]=start+a1+a2*32;
-	//mvaddwstr (5+a2*2, a1*2+10, sim);
-	move (5+(a2+8)*2,a1*2+10);
-	echochar(0x000000+a1+a2*32);
-    }
-    refresh();
-//    beep();
-
-
-}
+//}
 
 
 
-	sim[0]=ACS_PI;
-	mvaddwstr (1, 10, sim);
-	move (1,15);
-	echochar(ACS_ULCORNER);
-	echochar(ACS_HLINE);
-	echochar(ACS_LLCORNER);
-	echochar(ACS_URCORNER);
-	echochar(ACS_LRCORNER);
-	echochar(ACS_LTEE);
-	echochar(ACS_RTEE);
-	echochar(ACS_BTEE);
-	echochar(ACS_TTEE);
-echochar('-');
-printw("%x",ACS_VLINE);
+//	sim[0]=ACS_PI;
+//	mvaddwstr (1, 10, sim);
+//	move (1,15);
+//	echochar(ACS_ULCORNER);
+//	echochar(ACS_HLINE);
+//	echochar(ACS_LLCORNER);
+//	echochar(ACS_URCORNER);
+//	echochar(ACS_LRCORNER);
+//	echochar(ACS_LTEE);
+//	echochar(ACS_RTEE);
+//	echochar(ACS_BTEE);
+//	echochar(ACS_TTEE);
+//echochar('-');
+//printw("%x",ACS_VLINE);
 
 //move (1,20);
 //printw ("color white = %d color black = %d color green = %d", COLOR_WHITE, COLOR_BLACK, COLOR_GREEN);
 
-attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
+//attron(COLOR_PAIR(COLOR_BLUE_YELLOW));
 refresh();
 move (1,114);
 printw ("y=%d x=%d", my, mx);
 //erase();
+
+
+for (a1=0; a1<117; a1++)
+{
+move(5,5+a1);
+echochar(0x400052);
+move(31,5+a1);
+echochar(0x400052);
+}
+for (a1=0; a1<25; a1++)
+{
+move(6+a1,4);
+echochar(0x400059);
+move(6+a1,122);
+echochar(0x400059);
+}
+move(5,4);
+echochar(0x400043);
+move(31,4);
+echochar(0x400044);
+move(5,122);
+echochar(0x400042);
+move(31,122);
+echochar(0x400041);
+
+//  uuuu
+
+move(6,5);
+echochar(0x40006c);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x400077);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x40006b);
+move(7,5);
+echochar(0x400078);
+echochar(0x400061);
+echochar(0x400061);
+echochar(0x400078);
+echochar(0x400061);
+echochar(0x400061);
+echochar(0x400078);
+move(8,5);
+echochar(0x400074);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x40006e);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x400076);
+move(9,5);
+echochar(0x400078);
+echochar(0x400061);
+echochar(0x400061);
+echochar(0x400078);
+echochar(0x400061);
+echochar(0x400061);
+echochar(0x400078);
+move(10,5);
+echochar(0x40006d);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x400076);
+echochar(0x400071);
+echochar(0x400071);
+echochar(0x40006a);
+
+
+
+
+
 refresh();
 
 
