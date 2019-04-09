@@ -4,21 +4,32 @@
 #include <math.h>
 #include <wchar.h>
 #include <string.h>
+#include <time.h>
+#include <stdio.h>	//for fopen
+#include "face.h"
 
 #define pair1 1
 #define pair2 2
 #define pair3 3
 
-
+struct tm *tim;
+time_t ntim;
+char a[50];
 
 
 void mwin_init (void)
 {
+
+
     int mx, my, x;
     setlocale(LC_ALL, "en_US.UTF-8");
     WINDOW *stdscr = initscr();
     getmaxyx(stdscr, my, mx);
-
+	
+	raw();
+	keypad(stdscr, TRUE);
+	halfdelay(1);
+	curs_set(0);
     start_color();
 
     init_pair(pair1, COLOR_BLACK, COLOR_WHITE);
@@ -81,10 +92,30 @@ void mwin_init (void)
 	echochar(0x400052);
     }
     echochar(0x400041);
+////////////////////////////////////////////////////////////
+    pltab(5,5);
 
 
-    move (5,11);
+/////////////////////////////////////////////////////////////
+
+    move (1,3);
     printw ("y=%d x=%d", my, mx);
+    refresh();
+
+    ntim=time(NULL);
+    tim=localtime(&ntim);
+//    move (7,7);
+//    printw("ttttt=%d", ntim);
+//    printw(asctime(tim));
+//    move (8,7);
+//    printw("%d:%d:%d", tim->tm_hour, tim->tm_min, tim->tm_sec);
+
+    move (1,117);
+    strftime(a,50,"%H:%M:%S",tim);
+    attron(COLOR_PAIR(pair2));
+    printw("%s",a);
+    
+
     refresh();
 }
 //erase();
@@ -246,4 +277,59 @@ move (10, 20);
 void mwin_out (void)
 {
     endwin();
+}
+void pltab (int py, int px)
+{
+    int ptx, pty;
+    for (pty=0; pty<16; pty++)
+    {
+	for (ptx=0; ptx<8; ptx++)
+		{
+	
+	
+	
+		}
+    }
+
+
+}
+
+
+void wrefr (void)
+{
+	FILE *fl;
+	char cap[5];
+    ntim=time(NULL);
+    tim=localtime(&ntim);
+//    move (7,7);
+//    printw("ttttt=%d", ntim);
+//    printw(asctime(tim));
+//    move (8,7);
+//    printw("%d:%d:%d", tim->tm_hour, tim->tm_min, tim->tm_sec);
+
+    move (1,117);
+    strftime(a,50,"%H:%M:%S",tim);
+    attron(COLOR_PAIR(pair2));
+    printw("%s",a);
+///////////
+	//char pathf[]="/sys/class/power_supply/BAT0/capasity";
+	fl = fopen( "/sys/class/power_supply/BAT0/capacity", "r");
+    if ( fl != 0 )
+	{
+		fscanf (fl, "%s", cap);
+		move (1,108);
+		attron(COLOR_PAIR(pair1));
+		printw ("%s%% ", cap);
+		fclose(fl);
+	}
+	else
+	{
+	move (1,108);
+	attron(COLOR_PAIR(pair3));
+	printw ("%s","err");
+	}
+
+    refresh();
+
+
 }
